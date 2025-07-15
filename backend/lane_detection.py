@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 
 def detect_lane(image_path=None, video_path=None):
     if video_path:
@@ -38,6 +39,7 @@ def process_frame(frame):
     # Resize for efficiency on M2
     frame = cv2.resize(frame, (640, 480))
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    gray = cv2.equalizeHist(gray)  # Low-light optimization
     blur = cv2.GaussianBlur(gray, (5, 5), 0)
     edges = cv2.Canny(blur, 50, 150)
     
@@ -104,5 +106,8 @@ def process_frame(frame):
     return cv2.addWeighted(frame, 1, line_img, 0.8, 0), lane_position
 
 if __name__ == "__main__":
+    start = time.time()
     position, output = detect_lane(image_path='test_road.jpg')
+    fps = 1 / (time.time() - start)
     print(f"Lane position: {position}")
+    print(f"Processing FPS: {fps}")
