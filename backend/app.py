@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from lane_detection import detect_lane
 import os
@@ -35,6 +35,10 @@ def upload_file():
         return jsonify({'error': 'Processing failed - no lanes detected'}), 500
     
     return jsonify({'lane_position': position, 'output_path': output_path, 'fps': fps})
+
+@app.route('/<filename>')
+def serve_output(filename):
+    return send_from_directory('.', filename)
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'jpeg', 'png', 'mp4', 'avi', 'mov'}
