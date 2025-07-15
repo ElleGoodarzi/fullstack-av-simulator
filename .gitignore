@@ -46,4 +46,9 @@ venv/
 *.mp4
 *.png
 *.avi
-output.* 
+output.*
+
+# Frontend
+frontend/node_modules/
+frontend/build/
+frontend/.env 
