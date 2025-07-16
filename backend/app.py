@@ -34,7 +34,7 @@ def upload_file():
     if output_path is None:
         return jsonify({'error': 'Processing failed - no lanes detected'}), 500
     
-    return jsonify({'lane_position': position, 'output_path': output_path, 'fps': fps})
+    return jsonify({'lane_position': position if position is not None else 0.0, 'output_path': output_path, 'fps': fps})
 
 @app.route('/<filename>')
 def serve_output(filename):

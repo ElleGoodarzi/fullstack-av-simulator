@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 600px) {
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  input {
+    width: 100%;
+  }
+  img {
+    width: 100%;
+  }
+}

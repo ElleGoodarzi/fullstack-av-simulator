@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    style="padding: 20px; max-width: 600px; margin: auto;"
+  >
+    <h1>
+      AV Lane Detection Simulator
+    </h1>
+    <form>
+      <input
+        accept="image/*,video/*"
+        type="file"
+      />
+      <button
+        type="submit"
+      >
+        Process
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

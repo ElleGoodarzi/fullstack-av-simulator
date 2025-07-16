@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './App.css';
 
 function App() {
   const [file, setFile] = useState(null);
@@ -44,13 +45,27 @@ function App() {
       {loading && <p>Processing...</p>}
       {result && (
         <div>
-          <p>Lane Position: {result.lane_position.toFixed(4)}</p>
-          <p>FPS: {result.fps.toFixed(2)}</p>
-          <p>Steering: {simulateSteer(result.lane_position)}</p>
+          {result && result.lane_position !== undefined && (
+            <p>Lane Position: {result.lane_position.toFixed(4)}</p>
+          )}
+          {result && result.fps !== undefined && (
+            <p>FPS: {result.fps.toFixed(2)}</p>
+          )}
+          {result && result.lane_position !== undefined && (
+            <p>Simulated Steering: {simulateSteer(result.lane_position)}</p>
+          )}
           {result.output_path && (
             <div>
               <h3>Output:</h3>
               <img src={`http://127.0.0.1:5000/${result.output_path}`} alt="Processed" style={{ maxWidth: '100%' }} />
+            </div>
+          )}
+          {result.output_path && result.output_path.endsWith('.mp4') && (
+            <div>
+              <h3>Processed Output:</h3>
+              <video controls style={{ maxWidth: '100%' }}>
+                <source src={`http://127.0.0.1:5000/${result.output_path}`} type="video/mp4" />
+              </video>
             </div>
           )}
           {result.error && <p>Error: {result.error}</p>}
